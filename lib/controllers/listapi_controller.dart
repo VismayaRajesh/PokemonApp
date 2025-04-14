@@ -6,10 +6,13 @@ import '../services/api_service.dart';
 class ListapiController extends GetxController {
   final _apiService = PokemonApiService();
 
-  var pokemonList = <dynamic>[].obs;
+  var pokemonList = <dynamic>[].obs;         // Full list
+  var filteredList = <dynamic>[].obs;        // Filtered list for display
   var bgColors = <Color?>[].obs;
+
   var offset = 0.obs;
   final int limit = 10;
+
   var isLoading = false.obs;
   var hasMore = true.obs;
 
@@ -27,6 +30,7 @@ class ListapiController extends GetxController {
     final data = await _apiService.fetchPokemons(offset: offset.value, limit: limit);
     if (data != null && data.results.isNotEmpty) {
       pokemonList.addAll(data.results);
+      filteredList.assignAll(pokemonList); // Update filtered list too
       bgColors.addAll(List<Color?>.filled(data.results.length, null));
       offset.value += limit;
       isLoading.value = false;
@@ -52,9 +56,23 @@ class ListapiController extends GetxController {
       final dominantColor = paletteGenerator.dominantColor?.color;
       if (dominantColor != null) {
         bgColors[index] = dominantColor.withOpacity(0.25);
-        refresh();
+        refresh(); // Notifies UI
       }
     } catch (e) {
+      // Handle palette error if needed
+    }
+  }
+
+  /// Filters Pokémon list by name
+  void filterPokemons(String query) {
+    if (query.isEmpty) {
+      filteredList.assignAll(pokemonList);
+    } else {
+      filteredList.assignAll(
+        pokemonList.where(
+              (pokemon) => pokemon.name.toLowerCase().contains(query.toLowerCase()),
+        ),
+      );
     }
   }
 }

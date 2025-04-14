@@ -1,19 +1,26 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/core/constants/app_icons.dart';
+import 'package:pokemon_app/widgets/home/view_toggle_button.dart';
 
-import '../../../controllers/home_controller.dart';
+import '../../controllers/home_controller.dart';
+import '../../core/constants/app_icons.dart';
 import '../../core/constants/app_string.dart';
-import 'view_toggle_button.dart';
 
 class SearchBarWithToggle extends StatelessWidget {
   final HomeController controller;
+  final TextEditingController searchController;
+  final Function(String) onSearchChanged;
 
-  const SearchBarWithToggle({super.key, required this.controller});
+  const SearchBarWithToggle({
+    super.key,
+    required this.controller,
+    required this.searchController,
+    required this.onSearchChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
-    final isDark = brightness == Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Row(
       children: [
@@ -21,7 +28,7 @@ class SearchBarWithToggle extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
-              color: isDark? Colors.grey[900] : Colors.grey[200],
+              color: isDark ? Colors.grey[900] : Colors.grey[200],
               borderRadius: BorderRadius.circular(12),
             ),
             height: 50,
@@ -31,6 +38,8 @@ class SearchBarWithToggle extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
+                    controller: searchController,
+                    onChanged: onSearchChanged,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: AppStrings.homePageSearchBarTitle,
@@ -45,9 +54,7 @@ class SearchBarWithToggle extends StatelessWidget {
         LayoutBuilder(
           builder: (context, constraints) {
             return ViewToggleButton(
-              onViewChanged: (isGrid) {
-                controller.toggleView(isGrid);
-              },
+              onViewChanged: controller.toggleView,
               initialView: controller.isGrid.value,
               constraints: constraints,
             );

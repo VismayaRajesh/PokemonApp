@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:pokemon_app/controllers/listapi_controller.dart';
+import 'package:pokemon_app/controllers/gridapi_controller.dart'; // Add this
 import '../../controllers/home_controller.dart';
 import '../../widgets/home/pokemon_grid_widget.dart';
 import '../../widgets/home/pokemon_list_widget.dart';
@@ -11,6 +12,9 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final HomeController controller = Get.find();
+  final ListapiController listController = Get.find();
+  final GridapiController gridController = Get.find(); // Add this
+  final searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,20 @@ class HomePage extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 16),
-              SearchBarWithToggle(controller: controller),
+
+              // 🔍 Search Bar With Toggle that updates both list/grid
+              SearchBarWithToggle(
+                controller: controller,
+                searchController: searchController,
+                onSearchChanged: (value) {
+                  listController.filterPokemons(value);
+                  gridController.filterPokemons(value); // Update here too
+                },
+              ),
+
+              const SizedBox(height: 16),
+
+              // 🔄 Toggle between List & Grid views
               Expanded(
                 child: Obx(
                       () => AnimatedSwitcher(
@@ -40,8 +57,8 @@ class HomePage extends StatelessWidget {
                       return ScaleTransition(scale: animation, child: child);
                     },
                     child: controller.isGrid.value
-                        ?  PokemonGridWidget(key: ValueKey('grid'))
-                        : PokemonListWidget(key: ValueKey('list')),
+                        ? PokemonGridWidget(key: const ValueKey('grid'))
+                        : PokemonListWidget(key: const ValueKey('list')),
                   ),
                 ),
               ),
