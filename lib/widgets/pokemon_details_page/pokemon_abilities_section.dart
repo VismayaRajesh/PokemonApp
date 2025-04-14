@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_color.dart';
 import '../../utils/string_extensions.dart';
 import '../../model/pokemon_details_model.dart';
 
@@ -19,8 +20,8 @@ class PokemonAbilitiesSection extends StatelessWidget {
             'Abilities',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black),
+                    ? AppColors.white
+                    : AppColors.black),
           ),
           const SizedBox(height: 8),
           Wrap(
@@ -36,8 +37,8 @@ class PokemonAbilitiesSection extends StatelessWidget {
                     margin: const EdgeInsets.only(right: 6),
                     decoration:  BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black,
+                        ? AppColors.white
+                        : AppColors.black,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -45,8 +46,8 @@ class PokemonAbilitiesSection extends StatelessWidget {
                     ability.ability?.name?.capitalize().replaceAll('-', ' ') ??
                         'Unknown ability',
                     style:  TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black),
+                        ? AppColors.white
+                        : AppColors.black),
                   ),
                 ],
               );

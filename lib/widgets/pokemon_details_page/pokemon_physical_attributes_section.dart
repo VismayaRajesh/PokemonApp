@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_color.dart';
 import '../../model/pokemon_details_model.dart';
 
 class PokemonPhysicalAttributesSection extends StatelessWidget {
@@ -40,16 +41,16 @@ class PokemonPhysicalAttributesSection extends StatelessWidget {
         Text(
           label,
           style:  TextStyle(fontSize: 16, color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white
-              : Colors.black,fontWeight: FontWeight.bold),
+              ? AppColors.white
+              : AppColors.black,fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
         Text(
           value,
           style:  TextStyle(fontSize: 18, fontWeight: FontWeight.w500,
               color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black),
+                  ? AppColors.white
+                  : AppColors.black),
         ),
       ],
     );

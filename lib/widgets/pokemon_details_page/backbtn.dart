@@ -17,8 +17,8 @@ class Backbtn extends StatelessWidget {
         ),
         child: InkWell(child: Icon(Icons.arrow_back,size: 19,
             color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.white),
+                ? AppColors.white
+                : AppColors.white),
           onTap: (){
             Navigator.pop(context);
           },),

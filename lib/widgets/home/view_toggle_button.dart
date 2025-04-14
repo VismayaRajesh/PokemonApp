@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:pokemon_app/core/constants/app_color.dart';
 
 import 'view_option_item.dart';
 
@@ -144,7 +145,7 @@ class _ViewToggleButtonState extends State<ViewToggleButton>
         ),
         child: Icon(
           _isGrid ? LucideIcons.grid2x2 : LucideIcons.list,
-          color: Colors.white,
+          color: AppColors.white,
         ),
       ),
     );
