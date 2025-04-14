@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_color.dart';
 import '../../model/pokemon_details_model.dart';
 
 class PokemonStatsSection extends StatelessWidget {
@@ -25,8 +26,8 @@ class PokemonStatsSection extends StatelessWidget {
             'Base Stats',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
             color:Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.black,),
+                ? AppColors.white
+                : AppColors.black,),
           ),
           const SizedBox(height: 16),
           ...stats.map((stat) {
@@ -45,16 +46,16 @@ class PokemonStatsSection extends StatelessWidget {
                         getStatName(statName),
                         style:  TextStyle(fontWeight: FontWeight.w500,
                             color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black
+                                ? AppColors.white
+                                : AppColors.black
                         ),
                       ),
                       Text(
                         baseStat.toString(),
                         style:  TextStyle(fontWeight: FontWeight.w500,
                            color: Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black),
+                                ? AppColors.white
+                                : AppColors.black),
                       ),
                     ],
                   ),

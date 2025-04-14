@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_color.dart';
+
 class ViewOptionItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -21,20 +23,20 @@ class ViewOptionItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           children: [
-            Icon(icon, size: 18, color: isSelected ? Colors.blue : Colors.grey),
+            Icon(icon, size: 18, color: isSelected ? AppColors.blue : AppColors.grey),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
                 label,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: isSelected ? Colors.blue : Colors.black,
+                  color: isSelected ? AppColors.blue : AppColors.black,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
             ),
             if (isSelected)
-              const Icon(Icons.check, size: 18, color: Colors.blue),
+              const Icon(Icons.check, size: 18, color: AppColors.blue),
           ],
         ),
       ),

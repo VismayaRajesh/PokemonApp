@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/constants/app_color.dart';
 import '../../utils/string_extensions.dart';
 import '../../model/pokemon_details_model.dart' as model;
 
@@ -24,8 +25,8 @@ class PokemonTypesSection extends StatelessWidget {
             'Types',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
                 color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black,),
+                    ? AppColors.white
+                    : AppColors.black,),
           ),
           const SizedBox(height: 8),
           Wrap(
@@ -36,14 +37,14 @@ class PokemonTypesSection extends StatelessWidget {
               return Chip(
                 label: Text(
                   typeName.capitalize(),
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(color: AppColors.white),
                 ),
                 backgroundColor: getTypeColor(typeName),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                   side: BorderSide(
                     color: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.white
+                        ? AppColors.white
                         : Colors.transparent, // Border color
                     width: 1,             // Border width
                   ),

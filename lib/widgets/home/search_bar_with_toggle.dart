@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:pokemon_app/widgets/home/view_toggle_button.dart';
 
 import '../../controllers/home_controller.dart';
-import '../../core/constants/app_icons.dart';
+import '../../core/constants/app_color.dart';
 import '../../core/constants/app_string.dart';
 
 class SearchBarWithToggle extends StatelessWidget {
@@ -34,7 +35,7 @@ class SearchBarWithToggle extends StatelessWidget {
             height: 50,
             child: Row(
               children: [
-                const Icon(AppIcon.searchh, color: Colors.grey),
+                const Icon(LucideIcons.search, color: AppColors.grey),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(

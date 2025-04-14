@@ -36,19 +36,18 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 16),
 
-              // 🔍 Search Bar With Toggle that updates both list/grid
+
               SearchBarWithToggle(
                 controller: controller,
                 searchController: searchController,
                 onSearchChanged: (value) {
                   listController.filterPokemons(value);
-                  gridController.filterPokemons(value); // Update here too
+                  gridController.filterPokemons(value);
                 },
               ),
 
               const SizedBox(height: 16),
 
-              // 🔄 Toggle between List & Grid views
               Expanded(
                 child: Obx(
                       () => AnimatedSwitcher(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 
+import '../../core/constants/app_color.dart';
 import '../../model/pokemon_details_model.dart';
 
 class PokemonHeaderSection extends StatefulWidget {
@@ -104,7 +105,7 @@ class _PokemonHeaderSectionState extends State<PokemonHeaderSection> {
                       width: 200,
                       decoration: BoxDecoration(
                         // Inner yellow border for image
-                        border: Border.all(color: Colors.yellow, width: 3),
+                        border: Border.all(color: AppColors.yellow, width: 3),
                         borderRadius: BorderRadius.circular(16), // Inner rounded corners
                         // Outer shadow to complement the yellow border
                         boxShadow: [
@@ -146,7 +147,7 @@ class _PokemonHeaderSectionState extends State<PokemonHeaderSection> {
                     width: _currentIndex == index ? 12 : 8,
                     height: 9,
                     decoration: BoxDecoration(
-                      color: _currentIndex == index ? Colors.yellow : Colors.blue,
+                      color: _currentIndex == index ? AppColors.yellow : AppColors.blue,
                       borderRadius: BorderRadius.circular(8),
                     ),
                   );
