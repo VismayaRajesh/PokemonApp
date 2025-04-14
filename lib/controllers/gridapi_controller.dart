@@ -5,7 +5,8 @@ import '../services/api_service.dart';
 class GridapiController extends GetxController {
   final _apiService = PokemonApiService();
 
-  var pokemonList = <dynamic>[].obs;
+  var pokemonList = <dynamic>[].obs;         // Full list
+  var filteredList = <dynamic>[].obs;        // Filtered for search
   var offset = 0.obs;
   final int limit = 10;
   var isLoading = false.obs;
@@ -25,11 +26,24 @@ class GridapiController extends GetxController {
     final data = await _apiService.fetchPokemons(offset: offset.value, limit: limit);
     if (data != null && data.results.isNotEmpty) {
       pokemonList.addAll(data.results);
+      filteredList.assignAll(pokemonList); // Sync filtered list
       offset.value += limit;
-      isLoading.value = false;
     } else {
       hasMore.value = false;
-      isLoading.value = false;
+    }
+
+    isLoading.value = false;
+  }
+
+  void filterPokemons(String query) {
+    if (query.isEmpty) {
+      filteredList.assignAll(pokemonList);
+    } else {
+      filteredList.assignAll(
+        pokemonList.where(
+              (pokemon) => pokemon.name.toLowerCase().contains(query.toLowerCase()),
+        ),
+      );
     }
   }
 }

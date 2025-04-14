@@ -31,7 +31,7 @@ class PokemonGridWidget extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.only(top: 22),
-              itemCount: controller.pokemonList.length,
+              itemCount: controller.filteredList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
@@ -39,7 +39,7 @@ class PokemonGridWidget extends StatelessWidget {
                 childAspectRatio: 3 / 4,
               ),
               itemBuilder: (context, index) {
-                final pokemon = controller.pokemonList[index];
+                final pokemon = controller.filteredList[index];
                 final url = pokemon.url;
                 final id = url.split('/')[6];
                 final imageUrl =

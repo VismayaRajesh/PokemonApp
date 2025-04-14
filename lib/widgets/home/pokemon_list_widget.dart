@@ -6,7 +6,6 @@ import '../../controllers/listapi_controller.dart';
 import '../../page/pokemon_details_page.dart';
 import 'package:pokemon_app/utils/string_extensions.dart';
 
-
 class PokemonListWidget extends StatelessWidget {
   PokemonListWidget({Key? key}) : super(key: key);
 
@@ -32,12 +31,14 @@ class PokemonListWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             ListView.separated(
-              itemCount: controller.pokemonList.length,
+              itemCount: controller.filteredList.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               separatorBuilder: (context, index) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
-                final pokemon = controller.pokemonList[index];
+                final pokemon = controller.filteredList[index];
+                final originalIndex = controller.pokemonList.indexOf(pokemon);
+
                 final url = pokemon.url;
                 final id = url.split('/')[6];
                 final imageUrl =
@@ -47,32 +48,32 @@ class PokemonListWidget extends StatelessWidget {
                   onTap: () {
                     Get.to(() => PokemonDetailsPage(id: int.parse(id)));
                   },
-                  child: Obx(() {
-                    return Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: controller.bgColors[index] ?? Colors.grey[200],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: imageUrl,
-                            height: 70,
-                            width: 70,
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: (originalIndex != -1 && originalIndex < controller.bgColors.length)
+                          ? controller.bgColors[originalIndex] ?? Colors.grey[200]
+                          : Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: imageUrl,
+                          height: 70,
+                          width: 70,
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          '${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
-                          const SizedBox(width: 16),
-                          Text(
-                            '${pokemon.name[0].toUpperCase()}${pokemon.name.substring(1)}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             ),
